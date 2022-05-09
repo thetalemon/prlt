@@ -1,0 +1,51 @@
+{
+  "user": {
+    "repositories": {
+      "nodes": [
+        {
+          "nameWithOwner": "thetalemon/todoist-line-bot",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/movie2music",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/manas-slides",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/irish-coffee",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/practice-rust-beginner",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/practice-waf",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/shells",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/memo",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/aws-sandbox",
+          "__typename": "Repository"
+        },
+        {
+          "nameWithOwner": "thetalemon/prlt",
+          "__typename": "Repository"
+        }
+      ],
+      "__typename": "RepositoryConnection"
+    },
+    "__typename": "User"
+    
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "repository": {
+    "pullRequests": {
+      "edges": [
+        {
+          "node": {
+            "mergedAt": "2022-05-05T11:41:35Z",
+            "createdAt": "2022-05-02T07:57:45Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-03T11:53:13Z",
+            "createdAt": "2022-05-02T13:01:24Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-04T19:31:23Z",
+            "createdAt": "2022-05-02T15:12:22Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-06T22:32:51Z",
+            "createdAt": "2022-05-03T06:26:55Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-06T16:16:28Z",
+            "createdAt": "2022-05-03T13:59:03Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-05T21:57:31Z",
+            "createdAt": "2022-05-03T21:18:00Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-06T22:32:42Z",
+            "createdAt": "2022-05-04T06:26:17Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-05T09:55:34Z",
+            "createdAt": "2022-05-04T17:01:07Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-06T14:56:57Z",
+            "createdAt": "2022-05-06T12:29:11Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        },
+        {
+          "node": {
+            "mergedAt": "2022-05-08T00:24:05Z",
+            "createdAt": "2022-05-07T13:24:50Z",
+            "__typename": "PullRequest"
+          },
+          "__typename": "PullRequestEdge"
+        }
+      ],
+      "__typename": "PullRequestConnection"
+    },
+    "__typename": "Repository"
+  }
+}
