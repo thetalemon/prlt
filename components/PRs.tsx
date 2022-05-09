@@ -17,29 +17,32 @@ const QUERY = gql`
   }
 `;
 
-function Calced({edge}: any) {
-  const pr = edge.node
+function getLt(pr: any): number {
   const merged = new Date(pr.mergedAt)
   const created = new Date(pr.createdAt)
   const diff = merged.getTime() - created.getTime()
 
-  const hours = Math.floor(diff / 1000 / 60 / 60) % 24
-  const days=Math.floor(diff/1000/60/60/24)
+  return diff
+}
+
+function TimeElement({ time }: { time: number }) {
+  const hours = Math.floor(time / 1000 / 60 / 60) % 24
+  const days = Math.floor(time / 1000 / 60 / 60 / 24)
+
+  return(
+    <h3>{days}days {hours}hours</h3>
+  )
+}
+
+function Calced({time}: any) {
   return ( 
-    <div key={pr.mergedAt} className={styles.card}>
-      <h3>{days}days {hours}hours </h3>
+    <div className={styles.card}>
+      <TimeElement time={ time }/>
     </div>
   )
 }
 
-function Average({ edges }: any) {
-  const prLtTimes = edges.map((edge:any) => {
-    const pr = edge.node
-    const merged = new Date(pr.mergedAt)
-    const created = new Date(pr.createdAt)
-    return merged.getTime() - created.getTime()
-  })
-
+function Average({ prLtTimes }: { prLtTimes: Array<any> }) {
   const prLtTimesListLength = prLtTimes.length
   if (prLtTimesListLength === 0) {
     return ( 
@@ -49,17 +52,15 @@ function Average({ edges }: any) {
     )
   }
   
-  const total = prLtTimes.reduce(function(sum, item){
+  const total = prLtTimes.reduce(function(sum: number, item: number){
     return sum + item
   }, 0);
-
   const average = total / prLtTimesListLength
 
-  const hours = Math.floor(average / 1000 / 60 / 60) % 24
-  const days=Math.floor(average/1000/60/60/24)
   return ( 
     <div className={styles.card}>
-      <p>平均: {days}days {hours}hours </p>
+      平均
+      <TimeElement time={average}/>
     </div>
   )
 }
@@ -169,14 +170,23 @@ export default function PRs() {
   // }
 
   const edges = data.repository.pullRequests.edges
+  const prLtTimes = edges.map((edge:any) => {
+    const pr = edge.node
+    return getLt(pr)
+  })
+
 
   return (
     <div>
       <div className={styles.grid}>
-        <Average edges={edges}/>
-        {edges.map((edge: any) => 
-          <Calced key={edge.node.mergedAt} edge={edge} />
-        )
+        <Average prLtTimes={prLtTimes}/>
+      </div>
+
+      <div className={styles.grid}>
+        {prLtTimes.map(
+          (time: any) => 
+            <Calced key={time} time={time} />
+          )
         }
       </div>
     </div>
