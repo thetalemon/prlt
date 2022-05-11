@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export type PullRequest = {
   mergedAt: string
-  createdAt: string  
+  createdAt: string
 }
 
 export type PullRequestNode = {
@@ -18,7 +18,7 @@ export type PrQueryResponse = {
 }
 
 export const PrQuery = gql`
-  query ($number: Int){
+  query ($number: Int) {
     repository(owner: "nodejs", name: "node") {
       pullRequests(last: $number, states: MERGED) {
         edges {
@@ -30,4 +30,4 @@ export const PrQuery = gql`
       }
     }
   }
-`;
+`
