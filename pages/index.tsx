@@ -1,9 +1,8 @@
-
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import ClientOnly from "../components/ClientOnly";
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
+import ClientOnly from '../components/ClientOnly'
 // import Github from "../components/Github";
-import PRs from "../components/PRs";
+import PRs from '../components/PRs'
 
 export default function ClientSide() {
   return (
@@ -20,15 +19,10 @@ export default function ClientSide() {
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+        <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
+          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
     </div>
-  );
+  )
 }
