@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import styles from '../styles/Home.module.css'
 import prs from '../mockData/prs.json'
 import { PrQuery, PrQueryResponse, PullRequest, PullRequestNode } from '../infra/pr'
-import {Box, Grid, Paper} from '@mui/material';
+import { Box, Grid, Paper } from '@mui/material'
 
 const classes = {
   card: {
@@ -33,11 +33,7 @@ function TimeElement({ time }: { time: number }) {
   const days = Math.floor(time / 1000 / 60 / 60 / 24)
 
   if (days === 0) {
-    return (
-      <span>
-        {hours}hours
-      </span>
-    )
+    return <span>{hours}hours</span>
   }
 
   return (
@@ -74,7 +70,7 @@ function Average({ prLtTimes }: { prLtTimes: number[] }) {
 
   return (
     <Paper sx={classes.average}>
-      平均: 
+      平均:
       <TimeElement time={average} />
     </Paper>
   )
@@ -87,11 +83,7 @@ export default function PRs() {
   const error = undefined
 
   if (loading) {
-    return (
-      <h2>
-        Loading...
-      </h2>
-    )
+    return <h2>Loading...</h2>
   }
 
   if (error) {
