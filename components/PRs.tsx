@@ -3,6 +3,18 @@ import styles from '../styles/Home.module.css'
 import prs from '../mockData/prs.json'
 import { PrQuery, PrQueryResponse, PullRequest, PullRequestNode } from '../infra/pr'
 import { Box, Grid, Paper } from '@mui/material'
+import React from 'react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
 const classes = {
   card: {
@@ -19,6 +31,29 @@ const classes = {
     borderRadius: '12px'
   }
 }
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+    title: {
+      display: true,
+      text: 'Chart.js Line Chart',
+    },
+  },
+};
 
 function getLt(pr: PullRequest): number {
   const merged = new Date(pr.mergedAt)
@@ -96,10 +131,26 @@ export default function PRs() {
     const pr = edge.node
     return getLt(pr)
   })
+  const mergedTimes: string[] = edges.map((edge: PullRequestNode) => {
+    return edge.node.mergedAt
+  })
+
+  const graphData = {
+    labels: mergedTimes,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: prLtTimes,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ],
+  };
 
   return (
     <Box>
       <Average prLtTimes={prLtTimes} />
+      <Line options={options} data={graphData} />
 
       <Grid container spacing={1}>
         {prLtTimes.map((time: number) => (
