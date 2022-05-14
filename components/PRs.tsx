@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 import prs from '../mockData/prs.json'
 import { PrQuery, PrQueryResponse, PullRequest, PullRequestNode } from '../infra/pr'
 import { Box, Grid, Paper } from '@mui/material'
-import React from 'react';
+import React from 'react'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,9 +12,9 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+  Legend
+} from 'chart.js'
+import { Line } from 'react-chartjs-2'
 
 const classes = {
   card: {
@@ -32,28 +32,20 @@ const classes = {
   }
 }
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top' as const,
+      position: 'top' as const
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
-    },
-  },
-};
+      text: 'Chart.js Line Chart'
+    }
+  }
+}
 
 function getLt(pr: PullRequest): number {
   const merged = new Date(pr.mergedAt)
@@ -142,10 +134,10 @@ export default function PRs() {
         label: 'Dataset 1',
         data: prLtTimes,
         borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-    ],
-  };
+        backgroundColor: 'rgba(255, 99, 132, 0.5)'
+      }
+    ]
+  }
 
   return (
     <Box>
