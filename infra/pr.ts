@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import prs from '../mockData/prs.json'
 
 export type PullRequest = {
   mergedAt: string
@@ -31,3 +32,11 @@ export const PrQuery = gql`
     }
   }
 `
+
+export function getPr() {
+  return {
+    data: prs as PrQueryResponse,
+    loading: false,
+    error: undefined
+  }
+}
