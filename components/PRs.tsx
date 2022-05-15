@@ -58,7 +58,11 @@ function TimeElement({ time }: { time: number }) {
     return <span>{hours}hours</span>
   }
 
-  return <span>{days}days {hours}hours</span>
+  return (
+    <span>
+      {days}days {hours}hours
+    </span>
+  )
 }
 
 function Calced({ time }: { time: number }) {
