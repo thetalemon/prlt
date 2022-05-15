@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
 import styles from '../styles/Home.module.css'
-import prs from '../mockData/prs.json'
-import { PrQuery, PrQueryResponse, PullRequest, PullRequestNode } from '../infra/pr'
+import { PrQuery, getPr, PullRequest, PullRequestNode } from '../infra/pr'
 import { Box, Grid, Paper } from '@mui/material'
 import React from 'react'
 import {
@@ -39,10 +38,6 @@ const options = {
   plugins: {
     legend: {
       position: 'top' as const
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Line Chart'
     }
   }
 }
@@ -63,11 +58,7 @@ function TimeElement({ time }: { time: number }) {
     return <span>{hours}hours</span>
   }
 
-  return (
-    <span>
-      {days}days {hours}hours
-    </span>
-  )
+  return <span>{days}days {hours}hours</span>
 }
 
 function Calced({ time }: { time: number }) {
@@ -97,7 +88,7 @@ function Average({ prLtTimes }: { prLtTimes: number[] }) {
 
   return (
     <Paper sx={classes.average}>
-      平均:
+      期間内の平均:
       <TimeElement time={average} />
     </Paper>
   )
@@ -105,16 +96,13 @@ function Average({ prLtTimes }: { prLtTimes: number[] }) {
 
 export default function PRs() {
   // const { data, loading, error } = useQuery(PrQuery, { variables: { number: 30 } })
-  const data: PrQueryResponse = prs
-  const loading = false
-  const error = undefined
+  const { data, loading, error } = getPr()
 
   if (loading) {
     return <h2>Loading...</h2>
   }
 
   if (error) {
-    console.error(error)
     return null
   }
 
@@ -131,7 +119,7 @@ export default function PRs() {
     labels: mergedTimes,
     datasets: [
       {
-        label: 'Dataset 1',
+        label: 'リードタイム',
         data: prLtTimes,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)'
