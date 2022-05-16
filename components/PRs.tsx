@@ -7,6 +7,7 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
+  TimeScale,
   PointElement,
   LineElement,
   Title,
@@ -14,6 +15,7 @@ import {
   Legend
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import 'chartjs-adapter-date-fns';
 
 const classes = {
   card: {
@@ -31,16 +33,7 @@ const classes = {
   }
 }
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
-
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const
-    }
-  }
-}
+ChartJS.register(CategoryScale, LinearScale, TimeScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 function getLt(pr: PullRequest): number {
   const merged = new Date(pr.mergedAt)
@@ -111,13 +104,38 @@ export default function PRs() {
   }
 
   const edges = data.repository.pullRequests.edges
+
+  edges.sort(function (a, b) {
+    const aDate = new Date(a.node.mergedAt)
+    const bDate = new Date(b.node.mergedAt)
+    return (aDate.getTime() > bDate.getTime() ? 1 : -1)
+  })
+
   const prLtTimes: number[] = edges.map((edge: PullRequestNode) => {
     const pr = edge.node
     return getLt(pr)
   })
+
   const mergedTimes: string[] = edges.map((edge: PullRequestNode) => {
     return edge.node.mergedAt
   })
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const
+      }
+    },
+    scales: {
+      x: {
+        type: 'time',
+        time: {
+          unit: 'day'
+        }
+      }
+    }
+  }
 
   const graphData = {
     labels: mergedTimes,
