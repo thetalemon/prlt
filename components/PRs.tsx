@@ -15,7 +15,7 @@ import {
   Legend
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
-import 'chartjs-adapter-date-fns';
+import 'chartjs-adapter-date-fns'
 
 const classes = {
   card: {
@@ -33,7 +33,16 @@ const classes = {
   }
 }
 
-ChartJS.register(CategoryScale, LinearScale, TimeScale, PointElement, LineElement, Title, Tooltip, Legend)
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  TimeScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+)
 
 function getLt(pr: PullRequest): number {
   const merged = new Date(pr.mergedAt)
@@ -108,7 +117,7 @@ export default function PRs() {
   edges.sort(function (a, b) {
     const aDate = new Date(a.node.mergedAt)
     const bDate = new Date(b.node.mergedAt)
-    return (aDate.getTime() > bDate.getTime() ? 1 : -1)
+    return aDate.getTime() > bDate.getTime() ? 1 : -1
   })
 
   const prLtTimes: number[] = edges.map((edge: PullRequestNode) => {
