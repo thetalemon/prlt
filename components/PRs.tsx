@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import styles from '../styles/Home.module.css'
-import { PrQuery, getPr, PullRequest, PullRequestNode } from '../infra/pr'
+import { PrQuery, getPr, PullRequest, PullRequestNode, PullRequestResponse } from '../infra/pr'
 import { Box, Grid, Paper } from '@mui/material'
 import React from 'react'
 import {
@@ -101,8 +101,9 @@ function Average({ prLtTimes }: { prLtTimes: number[] }) {
 }
 
 export default function PRs() {
-  // const { data, loading, error } = useQuery(PrQuery, { variables: { number: 30 } })
-  const { data, loading, error } = getPr()
+  const { data, loading, error } = useQuery(PrQuery, { variables: { number: 30 } })
+  // const { data, loading, error } = getPr()
+  console.log(data)
 
   if (loading) {
     return <h2>Loading...</h2>
@@ -113,19 +114,29 @@ export default function PRs() {
   }
 
   const edges = data.repository.pullRequests.edges
+  console.log(edges)
 
-  edges.sort(function (a, b) {
+
+  const copyedEdges: PullRequestResponse[] = Array.from(edges) as PullRequestResponse[]
+
+
+  const sortedEdges: PullRequestResponse[] = copyedEdges.sort(function (a, b) {
     const aDate = new Date(a.node.mergedAt)
     const bDate = new Date(b.node.mergedAt)
     return aDate.getTime() > bDate.getTime() ? 1 : -1
   })
 
-  const prLtTimes: number[] = edges.map((edge: PullRequestNode) => {
+  const prLtTimes: number[] = sortedEdges.map((edge: PullRequestNode) => {
     const pr = edge.node
     return getLt(pr)
   })
 
-  const mergedTimes: string[] = edges.map((edge: PullRequestNode) => {
+  const elapsedTimes: number[] = sortedEdges.map((edge: PullRequestNode) => {
+    const pr = edge.node
+    return Math.floor( getLt(pr) / 3600000 );
+  })
+
+  const mergedTimes: string[] = sortedEdges.map((edge: PullRequestNode) => {
     return edge.node.mergedAt
   })
 
@@ -151,7 +162,7 @@ export default function PRs() {
     datasets: [
       {
         label: 'リードタイム',
-        data: prLtTimes,
+        data: elapsedTimes,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)'
       }
