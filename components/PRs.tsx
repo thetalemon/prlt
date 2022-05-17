@@ -116,9 +116,7 @@ export default function PRs() {
   const edges = data.repository.pullRequests.edges
   console.log(edges)
 
-
   const copyedEdges: PullRequestResponse[] = Array.from(edges) as PullRequestResponse[]
-
 
   const sortedEdges: PullRequestResponse[] = copyedEdges.sort(function (a, b) {
     const aDate = new Date(a.node.mergedAt)
@@ -133,7 +131,7 @@ export default function PRs() {
 
   const elapsedTimes: number[] = sortedEdges.map((edge: PullRequestNode) => {
     const pr = edge.node
-    return Math.floor( getLt(pr) / 3600000 );
+    return Math.floor(getLt(pr) / 3600000)
   })
 
   const mergedTimes: string[] = sortedEdges.map((edge: PullRequestNode) => {
